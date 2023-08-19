@@ -1,0 +1,11 @@
+{
+  "name": "melody-verse",
+  "version": "1.0.0",
+  "description": "This contains code for the backend of melodyverse music verse",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sudhir-Nishad",
+  "license": "ISC"
+}
