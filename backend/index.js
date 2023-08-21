@@ -45,10 +45,6 @@ passport.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.send("Hello! We can develop now");
-});
-
 app.use("/auth", authRoute);
 
 app.listen(PORT, () => {

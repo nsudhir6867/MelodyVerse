@@ -16,13 +16,13 @@ router.post("/register", async (req, res) => {
       .json({ error: "A user with this email already exists" });
   }
   //User creation if user doesn't exist
-  const hashedPassword = bcrypt.hash(password, 10); //10 is salt.
+  const hashedPassword = await bcrypt.hash(password, 10); //10 is salt.
   const newUser = await User.create({
     firstName,
     lastName,
     email,
     username,
-    hashedPassword,
+    password: hashedPassword,
   });
   //Creation of unique token for the created user.
   const token = await getToken(email, password);
@@ -34,11 +34,13 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
   const user = await User.findOne({ email: email });
   if (!user) {
     return res.status(403).json({ error: "Invalid Credentials" });
   }
   //user exists
+  console.log(user);
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
     res.status(403).json({ error: "Invalid credentials" });
